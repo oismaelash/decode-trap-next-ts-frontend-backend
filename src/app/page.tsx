@@ -3,7 +3,9 @@
 
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
 import React, { useState } from 'react';
-const App: React.FC = () => {
+import { getTranslationSong } from '@/actions/getTranslationSong';
+
+const HomeClient: React.FC = () => {
   // const [isConnected, setIsConnected] = useState(false);
   const [searchMethod, setSearchMethod] = useState<'search' | 'url'>('search');
   // const [searchQuery, setSearchQuery] = useState('');
@@ -30,10 +32,9 @@ const App: React.FC = () => {
     
     if (searchMethod === 'search') {
       try {
-        const response = await fetch(`/api/lyrics?title=${encodeURIComponent(songTitle)}&artist=${encodeURIComponent(artistQuery)}`);
-        const data = await response.json();
+        const data = await getTranslationSong(artistQuery, songTitle)
         
-        if (response.ok) {
+        
           setResults({
             title: data.title,
             artist: artistQuery,
@@ -43,10 +44,7 @@ const App: React.FC = () => {
               translation: item.decode
             }))
           });
-        } else {
-          // Handle error case
-          console.error('Error fetching lyrics:', data.error);
-        }
+
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -383,4 +381,4 @@ const App: React.FC = () => {
     </div>
   );
 }
-export default App
+export default HomeClient

@@ -15,7 +15,7 @@ export async function analyzeLyrics(lyrics: string): Promise<LyricAnalysis[]> {
 Para cada trecho, retorne um objeto JSON com a seguinte estrutura:
 {
   "part": "trecho da música",
-  "decode": "explicação do significado"
+  "decode": "explicação do significado (na mesma lingua do trecho)"
 }
 
 Retorne um array [{"part": "X", "decode": "Y"}] de até 5 objetos no formato acima. A resposta deve ser apenas o JSON, sem texto adicional.
