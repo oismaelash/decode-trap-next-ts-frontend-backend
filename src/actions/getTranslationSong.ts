@@ -1,20 +1,22 @@
 'use server'
 
 import { analyzeLyrics } from "@/lib/openai"
-import { getSong } from "genius-lyrics-api";
+import { getLyrics, getSong } from "genius-lyrics-api";
 
 export async function getTranslationSong(artist: string, title: string) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lyrics?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`);
-    const data = await response.json();
-    const lyrics = data.lyrics
-
     const options = {
         apiKey: process.env.GENIUS_API_KEY || '',
         title,
         artist,
         optimizeQuery: true
     };
+
+    const lyrics = await getLyrics(options);
     const song = await getSong(options)
+
+    if (!lyrics) {
+        return { error: 'Lyrics not found' }
+    }
 
     const analysis = await analyzeLyrics(lyrics);
 
