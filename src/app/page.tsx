@@ -39,10 +39,10 @@ const HomeClient: React.FC = () => {
             title: data.title,
             artist: artistQuery,
             albumCover: data.albumCover,
-            excerpts: data.analysis.map((item: { part: string; decode: string }) => ({
+            excerpts: data.analysis?.map((item: { part: string; decode: string }) => ({
               original: item.part,
               translation: item.decode
-            }))
+            })) || []
           });
 
       } catch (error) {
