@@ -4,9 +4,9 @@
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
 import React, { useState } from 'react';
 const App: React.FC = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  // const [isConnected, setIsConnected] = useState(false);
   const [searchMethod, setSearchMethod] = useState<'search' | 'url'>('search');
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
   const [artistQuery, setArtistQuery] = useState('');
   const [songTitle, setSongTitle] = useState('');
   const [songUrl, setSongUrl] = useState('');
@@ -20,10 +20,10 @@ const App: React.FC = () => {
       translation: string;
     }>;
   }>(null);
-  const handleConnect = () => {
-    // This would handle the Spotify authentication
-    setIsConnected(true);
-  };
+  // const handleConnect = () => {
+  //   // This would handle the Spotify authentication
+  //   setIsConnected(true);
+  // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -38,7 +38,7 @@ const App: React.FC = () => {
             title: data.title,
             artist: artistQuery,
             albumCover: data.albumCover,
-            excerpts: data.analysis.map((item: any) => ({
+            excerpts: data.analysis.map((item: { part: string; decode: string }) => ({
               original: item.part,
               translation: item.decode
             }))
@@ -286,7 +286,7 @@ const App: React.FC = () => {
                     <h4 className="text-lg font-semibold mb-2 text-[#00FF99]">
                       Original Phrase:
                     </h4>
-                    <p className="text-xl italic">"{excerpt.original}"</p>
+                    <p className="text-xl italic">&ldquo;{excerpt.original}&rdquo;</p>
                   </div>
                   <div className="h-px bg-gradient-to-r from-transparent via-[#3D3D3D] to-transparent my-4"></div>
                   <div>

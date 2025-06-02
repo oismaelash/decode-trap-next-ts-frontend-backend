@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import { parse } from 'path';
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing OPENAI_API_KEY environment variable');
